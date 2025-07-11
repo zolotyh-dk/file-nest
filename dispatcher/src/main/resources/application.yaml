@@ -1,0 +1,11 @@
+server:
+  port: 8084
+
+logging:
+  level:
+    root: info
+    ru.zolotyh: debug
+
+bot:
+  name: file_nest_bot
+  token: 999
