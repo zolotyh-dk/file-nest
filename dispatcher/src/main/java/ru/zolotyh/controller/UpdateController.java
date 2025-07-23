@@ -1,6 +1,7 @@
 package ru.zolotyh.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -13,8 +14,13 @@ import static ru.zolotyh.model.RabbitQueue.*;
 @Component
 @Slf4j
 public class UpdateController {
+    private final UpdateProducer updateProducer;
     private TelegramBot telegramBot;
-    private UpdateProducer updateProducer;
+
+    @Autowired
+    public UpdateController(UpdateProducer updateProducer) {
+        this.updateProducer = updateProducer;
+    }
 
     public void registerBot(TelegramBot telegramBot) {
         this.telegramBot = telegramBot;
