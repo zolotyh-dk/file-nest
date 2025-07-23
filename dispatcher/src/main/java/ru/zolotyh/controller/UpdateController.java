@@ -58,15 +58,23 @@ public class UpdateController {
 
     private void processDocMessage(Update update) {
         updateProducer.produce(DOC_MESSAGE_UPDATE, update);
+        setPhotoIsReceivedView(update);
     }
 
     private void processPhotoMessage(Update update) {
         updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
+        setPhotoIsReceivedView(update);
     }
 
     private void setUnsupportedMessageTypeView(Update update) {
         SendMessage sendMessage = MessageUtils.generateSendMessageWithText(update,
                 "Неподдерживаемый тип сообщения!");
+        setView(sendMessage);
+    }
+
+    private void setPhotoIsReceivedView(Update update) {
+        SendMessage sendMessage = MessageUtils.generateSendMessageWithText(update,
+                "Файл получен и обрабатывается!");
         setView(sendMessage);
     }
 
